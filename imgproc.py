@@ -15,7 +15,7 @@ def loadImage(img_file):
         img = img[0]
     if len(img.shape) == 2: img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
     img = np.array(img)
-    return img
+    return img[:,:,:3]
 
 
 def cvtColorGray(img=None):

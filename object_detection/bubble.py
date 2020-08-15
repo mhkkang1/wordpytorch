@@ -17,10 +17,10 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 def test_net(model=None, image=None, params=None, bg=None, cls=None):
     blob, scale, label = params
     with torch.no_grad():  # pre-processing data for passing net
-        im_data = Variable(torch.FloatTensor(1).cuda())
-        im_info = Variable(torch.FloatTensor(1).cuda())
-        num_boxes = Variable(torch.LongTensor(1).cuda())
-        gt_boxes = Variable(torch.FloatTensor(1).cuda())
+        im_data = Variable(torch.FloatTensor(1))
+        im_info = Variable(torch.FloatTensor(1))
+        num_boxes = Variable(torch.LongTensor(1))
+        gt_boxes = Variable(torch.FloatTensor(1))
 
     im_info_np = np.array([[blob.shape[1], blob.shape[2], scale[0]]], dtype=np.float32)
     im_data_pt = torch.from_numpy(blob)

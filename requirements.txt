@@ -1,7 +1,4 @@
-torch==1.0.0
-torchvision==0.2.1
 cython
-cffi
 opencv-python==3.4.2.17
 msgpack
 easydict

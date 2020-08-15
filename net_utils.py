@@ -11,6 +11,7 @@ from text_recognition.ltr import LTR
 from collections import OrderedDict
 import opt
 
+device = torch.device('cpu')
 
 def copyStateDict(state_dict):
     if list(state_dict.keys())[0].startswith("module"):
@@ -38,7 +39,7 @@ def load_speech_bubble_detector(args):
     if opt.cuda:
         model = torch.load(args.object_detector)
     else:
-        model = torch.load(args.object_detector, map_location=(lambda storage, loc: storage))
+        model = torch.load(args.object_detector, map_location=device)
 
     fasterRCNN.load_state_dict(model['model'])
     if 'pooling_mode' in model.keys(): cfg.POOLING_MODE = model['pooling_mode']
@@ -53,8 +54,8 @@ def load_text_detector(args):
 
     text_detector = LTD()
     print('Loading weights from checkpoint : ({})'.format(args.text_detector))
-    text_detector.load_state_dict(copyStateDict(torch.load(args.text_detector)))
-    text_detector = text_detector.cuda()
+    text_detector.load_state_dict(copyStateDict(torch.load(args.text_detector, map_location=device)))
+    # text_detector = text_detector.cuda()
     text_detector.eval()
     return text_detector
 
@@ -62,8 +63,8 @@ def load_text_detector(args):
 def load_text_recognizer(args):
     text_recognizer = LTR()
     print('Loading weights from checkpoint : ({})'.format(args.text_recognizer))
-    text_recognizer.load_state_dict(copyStateDict(torch.load(args.text_recognizer)))
-    text_recognizer = text_recognizer.cuda()
+    text_recognizer.load_state_dict(copyStateDict(torch.load(args.text_recognizer, map_location=device)))
+    # text_recognizer = text_recognizer.cuda()
     text_recognizer.eval()
     return text_recognizer
 

@@ -7,11 +7,11 @@ TEXT_RECOGNIZER_MODEL_PATH = './weights/Line-Text-Recognizer.pth'
 
 # TRANSLATION
 # You can get the ID and P/W to https://developers.naver.com/products/nmt/
-PAPAGO_ID = 'id'
-PAPAGO_PW = 'pw'
+PAPAGO_ID = ''
+PAPAGO_PW = ''
 
 # CUDA
-cuda = True
+cuda = False
 
 # BUBBLE DETECTION
 LABEL = np.asarray(['__background__', 'speech'])
